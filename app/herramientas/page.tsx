@@ -6,86 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
 import FloatingElements from "@/components/floating-elements"
 
-// Particle system for animated backgrounds
-const ParticleSystem = ({ color = "black", count = 50, size = 2 }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const [particles, setParticles] = useState<
-    { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[]
-  >([])
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const rect = canvas.getBoundingClientRect()
-    canvas.width = rect.width
-    canvas.height = rect.height
-
-    // Initialize particles
-    const initialParticles = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * size + 1,
-      opacity: Math.random() * 0.8 + 0.2,
-    }))
-    setParticles(initialParticles)
-
-    let animationId: number
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      setParticles(prevParticles =>
-        prevParticles.map(particle => {
-          // Update position
-          particle.x += particle.vx
-          particle.y += particle.vy
-
-          // Bounce off edges
-          if (particle.x <= 0 || particle.x >= canvas.width) particle.vx *= -1
-          if (particle.y <= 0 || particle.y >= canvas.height) particle.vy *= -1
-
-          // Keep particles within bounds
-          particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-          particle.y = Math.max(0, Math.min(canvas.height, particle.y))
-
-          // Draw particle
-          ctx.beginPath()
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-          ctx.fillStyle = color === 'black'
-            ? `rgba(0, 0, 0, ${particle.opacity * 0.3})`
-            : `rgba(255, 255, 255, ${particle.opacity * 0.6})`
-          ctx.fill()
-
-          return particle
-        })
-      )
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      if (animationId) cancelAnimationFrame(animationId)
-    }
-  }, [color, count, size])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
-      style={{ width: '100%', height: '100%' }}
-    />
-  )
-}
-
-
 export default function HerramientasPage() {
   const controls = useAnimation()
   const [isVisible, setIsVisible] = useState(false)
@@ -378,7 +298,6 @@ export default function HerramientasPage() {
             variants={itemVariants}
             className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-8 mb-12 shadow-lg border border-gray-200 relative overflow-hidden"
           >
-            <ParticleSystem color="black" count={30} size={1} />
             
             <motion.div
               initial={{ width: 0 }}
@@ -428,7 +347,6 @@ export default function HerramientasPage() {
             variants={itemVariants}
             className="bg-gradient-to-r from-black via-gray-900 to-black text-white rounded-2xl p-8 shadow-2xl relative overflow-hidden"
           >
-            <ParticleSystem color="white" count={40} size={2} />
             
             {/* Animated background pattern */}
             <div className="absolute inset-0">

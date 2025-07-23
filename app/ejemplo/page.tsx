@@ -5,84 +5,7 @@ import { Code, Terminal, Sparkles, Play, ArrowRight, FileText, PenBox } from "lu
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
 import FloatingElements from "@/components/floating-elements"
-// Particle system for animated backgrounds
-const ParticleSystem = ({ color = "black", count = 50, size = 2 }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const [particles, setParticles] = useState<
-    { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[]
-  >([])
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const rect = canvas.getBoundingClientRect()
-    canvas.width = rect.width
-    canvas.height = rect.height
-
-    // Initialize particles
-    const initialParticles = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * size + 1,
-      opacity: Math.random() * 0.8 + 0.2,
-    }))
-    setParticles(initialParticles)
-
-    let animationId: number
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      setParticles(prevParticles =>
-        prevParticles.map(particle => {
-          // Update position
-          particle.x += particle.vx
-          particle.y += particle.vy
-
-          // Bounce off edges
-          if (particle.x <= 0 || particle.x >= canvas.width) particle.vx *= -1
-          if (particle.y <= 0 || particle.y >= canvas.height) particle.vy *= -1
-
-          // Keep particles within bounds
-          particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-          particle.y = Math.max(0, Math.min(canvas.height, particle.y))
-
-          // Draw particle
-          ctx.beginPath()
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-          ctx.fillStyle = color === 'black'
-            ? `rgba(0, 0, 0, ${particle.opacity * 0.3})`
-            : `rgba(255, 255, 255, ${particle.opacity * 0.6})`
-          ctx.fill()
-
-          return particle
-        })
-      )
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      if (animationId) cancelAnimationFrame(animationId)
-    }
-  }, [color, count, size])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
-      style={{ width: '100%', height: '100%' }}
-    />
-  )
-}
 
 export default function ProgramaExplicacion() {
   const controls = useAnimation()
@@ -190,8 +113,6 @@ export default function ProgramaExplicacion() {
                   background: `linear-gradient(135deg, transparent, rgba(0,0,0,0.1))`,
                 }}
               />
-
-              <ParticleSystem color="black" count={25} size={1} />
 
               <CardHeader className="relative z-10 pb-4">
                 <div className="flex items-center space-x-4 mb-4">
