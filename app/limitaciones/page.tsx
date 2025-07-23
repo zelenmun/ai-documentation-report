@@ -84,8 +84,20 @@ const ParticleSystem = ({ color = "black", count = 50, size = 2 }) => {
   )
 }
 
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+  return isClient
+}
+
+
 // Floating elements component
 const FloatingElements = () => {
+  const isClient = useIsClient()
+  if (!isClient) return null
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {[...Array(10)].map((_, i) => (
