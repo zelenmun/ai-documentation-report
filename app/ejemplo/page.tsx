@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion"
 import { Code, Terminal, Sparkles, Play, ArrowRight, FileText, PenBox } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
-
+import FloatingElements from "@/components/floating-elements"
 // Particle system for animated backgrounds
 const ParticleSystem = ({ color = "black", count = 50, size = 2 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -81,46 +81,6 @@ const ParticleSystem = ({ color = "black", count = 50, size = 2 }) => {
       className="absolute inset-0 pointer-events-none"
       style={{ width: '100%', height: '100%' }}
     />
-  )
-}
-
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false)
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-  return isClient
-}
-
-
-// Floating elements component
-const FloatingElements = () => {
-  const isClient = useIsClient()
-  if (!isClient) return null
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-black rounded-full opacity-10"
-          initial={{ 
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-            y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-          }}
-          animate={{
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-            y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-          }}
-          transition={{
-            duration: 15 + Math.random() * 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "linear"
-          }}
-        />
-      ))}
-    </div>
   )
 }
 
