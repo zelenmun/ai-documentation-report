@@ -5,12 +5,17 @@ import { motion } from 'framer-motion'
 
 const FloatingElements = () => {
   const [isClient, setIsClient] = useState(false)
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
     setIsClient(true)
   }, [])
 
-  if (!isClient) return null // No renderiza en SSR
+  if (!isClient) return null
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -19,12 +24,12 @@ const FloatingElements = () => {
           key={i}
           className="absolute w-2 h-2 bg-black rounded-full opacity-10"
           initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * windowSize.width,  // Usar el estado
+            y: Math.random() * windowSize.height, // Usar el estado
           }}
           animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * windowSize.width,
+            y: Math.random() * windowSize.height,
           }}
           transition={{
             duration: 15 + Math.random() * 10,
