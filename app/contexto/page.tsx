@@ -3,7 +3,7 @@
 import { motion, useAnimation } from "framer-motion"
 import { AlertCircle, Clock, Users, Code, TrendingDown, Sparkles } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import FloatingElements from "@/components/floating-elements"
+
 import { useEffect, useState, useRef } from "react"
 
 export default function ContextoPage() {
@@ -67,7 +67,7 @@ export default function ContextoPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
-      <FloatingElements />
+      
       
       <div className="container mx-auto px-6 py-12 relative z-10">
         <motion.div 
