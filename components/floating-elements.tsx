@@ -4,32 +4,36 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const FloatingElements = () => {
-  const [isClient, setIsClient] = useState(false)
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
+  const [elements, setElements] = useState<Array<{x: number, y: number, targetX: number, targetY: number}>>([])
 
   useEffect(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight
-    })
-    setIsClient(true)
+    const generateElements = () => {
+      return [...Array(8)].map(() => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        targetX: Math.random() * window.innerWidth,
+        targetY: Math.random() * window.innerHeight,
+      }))
+    }
+
+    setElements(generateElements())
   }, [])
 
-  if (!isClient) return null
+  if (elements.length === 0) return null
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(8)].map((_, i) => (
+      {elements.map((element, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-black rounded-full opacity-10"
           initial={{
-            x: Math.random() * windowSize.width,  // Usar el estado
-            y: Math.random() * windowSize.height, // Usar el estado
+            x: element.x,
+            y: element.y,
           }}
           animate={{
-            x: Math.random() * windowSize.width,
-            y: Math.random() * windowSize.height,
+            x: element.targetX,
+            y: element.targetY,
           }}
           transition={{
             duration: 15 + Math.random() * 10,
