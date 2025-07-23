@@ -33,115 +33,191 @@ export function NavigationButtons() {
 
   return (
     <>
-      {/* Left Navigation Button */}
-      <AnimatePresence>
-        {prevPage && (
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
-            className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40"
-          >
-            <motion.div whileHover={{ scale: 1.1, x: -5 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => handleNavigation(prevPage.href)}
-                className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-2xl transition-all duration-300 p-4 rounded-full group relative overflow-hidden"
-                size="lg"
-              >
-                <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="flex items-center space-x-2 relative z-10">
-                  <motion.div
-                    animate={{ x: [-2, 2, -2] }}
-                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </motion.div>
-                  <div className="hidden lg:block">
-                    
-                    <div className="text-sm font-semibold">{prevPage.label}</div>
-                  </div>
-                </div>
-
-                {/* Animated border */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-white/20"
-                  animate={{
-                    borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
-                  }}
-                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                />
-              </Button>
-            </motion.div>
-
-            {/* Tooltip for mobile */}
+      {/* Desktop Navigation - Fixed positioned buttons */}
+      <div className="hidden lg:block">
+        {/* Left Navigation Button */}
+        <AnimatePresence>
+          {prevPage && (
             <motion.div
-              className="lg:hidden absolute left-full ml-4 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+              className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40"
             >
-              {prevPage.label}
-              <div className="absolute right-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-r-black" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <motion.div whileHover={{ scale: 1.1, x: -5 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  onClick={() => handleNavigation(prevPage.href)}
+                  className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-2xl transition-all duration-300 p-4 rounded-full group relative overflow-hidden"
+                  size="lg"
+                >
+                  <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      {/* Right Navigation Button */}
-      <AnimatePresence>
-        {nextPage && (
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3 }}
-            className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40"
-          >
-            <motion.div whileHover={{ scale: 1.1, x: 5 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => handleNavigation(nextPage.href)}
-                className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-2xl transition-all duration-300 p-4 rounded-full group relative overflow-hidden"
-                size="lg"
-              >
-                <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="flex items-center space-x-2 relative z-10">
-                  <div className="hidden lg:block text-right">
-                    
-                    <div className="text-sm font-semibold">{nextPage.label}</div>
+                  <div className="flex items-center space-x-2 relative z-10">
+                    <motion.div
+                      animate={{ x: [-2, 2, -2] }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </motion.div>
+                    <div>
+                      <div className="text-sm font-semibold">{prevPage.label}</div>
+                    </div>
                   </div>
+
+                  {/* Animated border */}
                   <motion.div
-                    animate={{ x: [-2, 2, -2] }}
-                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </motion.div>
-                </div>
-
-                {/* Animated border */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-white/20"
-                  animate={{
-                    borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
-                  }}
-                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                />
-              </Button>
+                    className="absolute inset-0 rounded-full border-2 border-white/20"
+                    animate={{
+                      borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
+                    }}
+                    transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                  />
+                </Button>
+              </motion.div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* Tooltip for mobile */}
+        {/* Right Navigation Button */}
+        <AnimatePresence>
+          {nextPage && (
             <motion.div
-              className="lg:hidden absolute right-full mr-4 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.3 }}
+              className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40"
             >
-              {nextPage.label}
-              <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-black" />
+              <motion.div whileHover={{ scale: 1.1, x: 5 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  onClick={() => handleNavigation(nextPage.href)}
+                  className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-2xl transition-all duration-300 p-4 rounded-full group relative overflow-hidden"
+                  size="lg"
+                >
+                  <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  <div className="flex items-center space-x-2 relative z-10">
+                    <div className="text-right">
+                      <div className="text-sm font-semibold">{nextPage.label}</div>
+                    </div>
+                    <motion.div
+                      animate={{ x: [-2, 2, -2] }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </motion.div>
+                  </div>
+
+                  {/* Animated border */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-white/20"
+                    animate={{
+                      borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
+                    }}
+                    transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                  />
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Mobile Navigation - Bottom positioned buttons */}
+      <div className="lg:hidden bg-gray-100">
+        <div className="flex justify-between items-center px-4 pb-6">
+          {/* Left Navigation Button for Mobile */}
+          <AnimatePresence>
+            {prevPage ? (
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    onClick={() => handleNavigation(prevPage.href)}
+                    className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-xl transition-all duration-300 p-3 rounded-full group relative overflow-hidden"
+                    size="sm"
+                  >
+                    <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <div className="flex items-center space-x-2 relative z-10">
+                      <motion.div
+                        animate={{ x: [-1, 1, -1] }}
+                        transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </motion.div>
+                      <div className="text-xs font-semibold max-w-[80px] truncate">
+                        {prevPage.label}
+                      </div>
+                    </div>
+
+                    {/* Animated border */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-white/20"
+                      animate={{
+                        borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
+                      }}
+                      transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
+                    />
+                  </Button>
+                </motion.div>
+              </motion.div>
+            ) : (
+              <div className="w-[100px]"></div> // Placeholder to maintain spacing
+            )}
+          </AnimatePresence>
+
+          {/* Right Navigation Button for Mobile */}
+          <AnimatePresence>
+            {nextPage ? (
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    onClick={() => handleNavigation(nextPage.href)}
+                    className="bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white border-2 border-black hover:border-gray-600 shadow-xl transition-all duration-300 p-3 rounded-full group relative overflow-hidden"
+                    size="sm"
+                  >
+                    <motion.div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <div className="flex items-center space-x-2 relative z-10">
+                      <div className="text-xs font-semibold max-w-[80px] truncate text-right">
+                        {nextPage.label}
+                      </div>
+                      <motion.div
+                        animate={{ x: [-1, 1, -1] }}
+                        transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </motion.div>
+                    </div>
+
+                    {/* Animated border */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-white/20"
+                      animate={{
+                        borderColor: ["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"],
+                      }}
+                      transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
+                    />
+                  </Button>
+                </motion.div>
+              </motion.div>
+            ) : (
+              <div className="w-[100px]"></div> // Placeholder to maintain spacing
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </>
   )
 }

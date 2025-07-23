@@ -23,8 +23,9 @@ export default function RootLayout({
     <html lang="es">
       <body className={inter.className}>
         <TopNavigation />
-        <NavigationButtons />
+        
         <main className="pt-16">{children}</main>
+        <NavigationButtons />
       </body>
     </html>
   )
