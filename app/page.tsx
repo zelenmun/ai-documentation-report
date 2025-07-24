@@ -235,13 +235,13 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 "Oscar Morán Gómez",
-                "Paula Andrade Orellana",
                 "Ryan Consuegra Morán",
+                "Kerly Hernández Carrera",
                 "Bismarck Izquierdo Montero",
                 "Kevin Osandón Valencia",
-                "Kevin Martínez Gavilánez",
-                "Kerly Hernández Carrera",
                 "Darwin Orrala Onofre",
+                "Kevin Martínez Gavilánez",
+                "Paula Andrade Orellana",
               ].map((author, index) => (
                 <motion.div
                   key={author}
