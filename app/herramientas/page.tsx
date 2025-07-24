@@ -74,9 +74,9 @@ export default function HerramientasPage() {
     },
     {
       area: "Velocidad y Costo",
-      claude: "Versión Premium",
-      grok: "$3 a $15",
-      chatgpt: "$0.30 - $15",
+      claude: "$3 - $15",
+      grok: "$0.30 - $15",
+      chatgpt: "Premium",
       deepseek: "Gratuito limitado",
     },
   ]

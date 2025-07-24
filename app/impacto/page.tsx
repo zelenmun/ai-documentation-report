@@ -21,29 +21,18 @@ export default function ImpactoPage() {
       description: "Mejora en la mantenibilidad y comprensión del código",
       icon: Code,
       color: "from-black to-gray-800",
-      benefits: [
-        "Reducción de tiempo en debugging",
-        "Facilita el onboarding de nuevos desarrolladores",
-        "Mejora la calidad del código",
-      ],
     },
     {
       title: "Ciencia de Datos",
       description: "Documentación automática de modelos y pipelines de datos",
       icon: BarChart,
       color: "from-black to-gray-800",
-      benefits: [
-        "Explicación automática de modelos ML",
-        "Documentación de transformaciones de datos",
-        "Reproducibilidad de experimentos",
-      ],
     },
     {
       title: "Sistemas de Información",
       description: "Documentación de arquitecturas y procesos de negocio",
       icon: Database,
       color: "from-black to-gray-800",
-      benefits: ["Mapeo automático de sistemas", "Documentación de APIs", "Procesos de integración claros"],
     },
   ]
 
@@ -233,27 +222,6 @@ export default function ImpactoPage() {
                     
                     <CardContent className="relative z-10">
                       <p className="text-gray-600 leading-relaxed mb-4">{field.description}</p>
-                      <div className="space-y-2">
-                        <p className="font-semibold text-black">Beneficios:</p>
-                        <ul className="space-y-2">
-                          {field.benefits.map((benefit, idx) => (
-                            <motion.li 
-                              key={idx} 
-                              className="text-gray-700 text-sm flex items-center space-x-2"
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.5 + idx * 0.1 }}
-                            >
-                              <motion.span 
-                                className="w-2 h-2 bg-black rounded-full flex-shrink-0"
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{ duration: 2, repeat: Infinity, delay: idx * 0.3 }}
-                              />
-                              <span>{benefit}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
                     </CardContent>
 
                     {/* Animated corner decoration */}
